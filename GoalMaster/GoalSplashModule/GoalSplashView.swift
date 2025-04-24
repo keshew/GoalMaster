@@ -108,7 +108,7 @@ struct GoalSplashView: View {
                         }
                         .cornerRadius(20)
                         .ignoresSafeArea()
-                        .offset(y: goalSplashModel.currentIndex == 0 ? 10 : (goalSplashModel.currentIndex == 1 ? 34 : 59))
+                        .offset(y: goalSplashModel.currentIndex == 0 ? getSpacing(for: UIScreen.main.bounds.width) : (goalSplashModel.currentIndex == 1 ? getSpacing2(for: UIScreen.main.bounds.width) : getSpacing3(for: UIScreen.main.bounds.width)))
                     
                 }
             }
@@ -118,6 +118,42 @@ struct GoalSplashView: View {
             GoalLoginView()
         }
     }
+    
+    func getSpacing(for width: CGFloat) -> CGFloat {
+        if width > 850 {
+            return 620
+        } else if width > 650 {
+            return 470
+          } else if width < 380 {
+              return 10
+          } else {
+              return 10
+          }
+      }
+    
+    func getSpacing2(for width: CGFloat) -> CGFloat {
+        if width > 850 {
+            return 620
+        } else if width > 650 {
+            return 470
+          }  else if width < 380 {
+              return 80
+          } else {
+              return 34
+          }
+      }
+    
+    func getSpacing3(for width: CGFloat) -> CGFloat {
+        if width > 850 {
+            return 620
+        } else if width > 650 {
+            return 470
+          }  else if width < 380 {
+              return 80
+          } else {
+              return 59
+          }
+      }
 }
 
 #Preview {

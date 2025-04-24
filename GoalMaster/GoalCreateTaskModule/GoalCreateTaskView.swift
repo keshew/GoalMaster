@@ -42,26 +42,49 @@ struct GoalCreateTaskView: View {
                         }
                         .padding(.top, 1)
                         
-                        
-                        HStack {
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("Start")
-                                    .Open(size: 17)
+                        if UIScreen.main.bounds.width > 650 {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Text("Start")
+                                        .Open(size: 17)
+                                    
+                                    DateTF2(date: $goalCreateTaskModel.dateStart)
+                                }
                                 
-                                DateTF2(date: $goalCreateTaskModel.dateStart)
-                            }
-                            
-                            Spacer()
-                            
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("Finish")
-                                    .Open(size: 17)
+                              
                                 
-                                DateTF(date: $goalCreateTaskModel.dateFinish,
-                                       secondDate: $goalCreateTaskModel.dateStart)
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Text("Finish")
+                                        .Open(size: 17)
+                                    
+                                    DateTF(date: $goalCreateTaskModel.dateFinish,
+                                           secondDate: $goalCreateTaskModel.dateStart)
+                                }
+                                
+                                Spacer()
                             }
+                            .padding(.horizontal)
+                        } else {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Text("Start")
+                                        .Open(size: 17)
+                                    
+                                    DateTF2(date: $goalCreateTaskModel.dateStart)
+                                }
+                                
+                                Spacer()
+                                
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Text("Finish")
+                                        .Open(size: 17)
+                                    
+                                    DateTF(date: $goalCreateTaskModel.dateFinish,
+                                           secondDate: $goalCreateTaskModel.dateStart)
+                                }
+                            }
+                            .padding(.horizontal)
                         }
-                        .padding(.horizontal)
                     }
                     
                     VStack(alignment: .leading, spacing: 5) {
@@ -239,7 +262,7 @@ struct GoalCreateTaskView: View {
                         }
                         .cornerRadius(20)
                         .ignoresSafeArea()
-                        .offset(y: 70)
+                        .offset(y: getSpacing(for: UIScreen.main.bounds.width))
                 }
             }
             .scrollDisabled(UIScreen.main.bounds.width > 380)
@@ -255,6 +278,20 @@ struct GoalCreateTaskView: View {
             GoalTabBarView()
         }
     }
+    
+    func getSpacing(for width: CGFloat) -> CGFloat {
+        if width > 850 {
+            return 620
+        } else if width > 650 {
+            return 450
+          } else if width > 400 {
+              return 8
+          } else if width < 220 {
+              return 50
+          } else {
+              return 70
+          }
+      }
 }
 
 #Preview {

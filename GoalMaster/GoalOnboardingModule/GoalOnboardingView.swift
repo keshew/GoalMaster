@@ -57,7 +57,7 @@ struct GoalOnboardingView: View {
                         }
                         .cornerRadius(20)
                         .ignoresSafeArea()
-                        .offset(y: 80)
+                        .offset(y: getSpacing(for: UIScreen.main.bounds.width))
                 }
                 .padding(.top)
             }
@@ -70,6 +70,18 @@ struct GoalOnboardingView: View {
             GoalSplashView()
         }
     }
+    
+    func getSpacing(for width: CGFloat) -> CGFloat {
+        if width > 850 {
+            return 620
+        } else if width > 650 {
+            return 470
+          } else if width < 380 {
+              return 80
+          } else {
+              return 80
+          }
+      }
 }
 
 #Preview {

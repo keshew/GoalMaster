@@ -132,10 +132,10 @@ struct GoalCalendarView: View {
                                         }
                                     }
                                 }
-                                .frame(height: 255)
+                                .frame(height: getSizeOffset(for: UIScreen.main.bounds.width))
                             }
                         }
-                        .frame(height: 350)
+                        .frame(height: getSizeGeometry(for: UIScreen.main.bounds.width))
                         .cornerRadius(20)
                         .padding(.horizontal)
                     
@@ -182,6 +182,29 @@ struct GoalCalendarView: View {
             if !UserDefaultsManager().isGuest() {
                 goalCalendarModel.loadTasks()
             }
+        }
+    }
+    func getSizeGeometry(for width: CGFloat) -> CGFloat {
+        if width > 850 {
+            return 830
+        } else if width > 650 {
+            return 670
+        } else if width < 220 {
+            return 350
+        } else {
+            return 350
+        }
+    }
+    
+    func getSizeOffset(for width: CGFloat) -> CGFloat {
+        if width > 850 {
+            return 700
+        } else if width > 650 {
+            return 570
+        } else if width < 220 {
+            return 255
+        } else {
+            return 255
         }
     }
 }

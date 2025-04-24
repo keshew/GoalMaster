@@ -112,7 +112,7 @@ struct GoalLoginView: View {
                         }
                         .cornerRadius(20)
                         .ignoresSafeArea()
-                        .offset(y: 290)
+                        .offset(y: getSpacing(for: UIScreen.main.bounds.width))
                 }
             }
             .scrollDisabled(UIScreen.main.bounds.width > 380)
@@ -137,6 +137,18 @@ struct GoalLoginView: View {
             )
         }
     }
+    
+    func getSpacing(for width: CGFloat) -> CGFloat {
+        if width > 850 {
+            return 830
+            } else if width > 650 {
+            return 670
+          }  else if width < 220 {
+              return 10
+          } else {
+              return 290
+          }
+      }
 }
 
 #Preview {
