@@ -51,7 +51,7 @@ struct GoalCreateTaskView: View {
                                     DateTF2(date: $goalCreateTaskModel.dateStart)
                                 }
                                 
-                              
+                                
                                 
                                 VStack(alignment: .leading, spacing: 5) {
                                     Text("Finish")
@@ -284,14 +284,12 @@ struct GoalCreateTaskView: View {
             return 620
         } else if width > 650 {
             return 450
-          } else if width > 400 {
-              return 8
-          } else if width < 220 {
-              return 50
-          } else {
-              return 70
-          }
-      }
+        } else if width < 380 {
+            return 50
+        } else {
+            return 70
+        }
+    }
 }
 
 #Preview {

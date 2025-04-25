@@ -7,6 +7,7 @@ struct GoalCalendarModel {
 struct Task: Codable {
     var repeatt: String
     var date: String
+    var finishDate: String
     var isDone: Bool
     var priority: String
     var category: String
@@ -17,7 +18,7 @@ struct Task: Codable {
     
     enum CodingKeys: String, CodingKey {
         case repeatt = "repeat"
-        case date, priority, category, title, color, time, id
+        case date, finishDate, priority, category, title, color, time, id
         case isDone = "isDone"
     }
     
@@ -25,6 +26,7 @@ struct Task: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.repeatt = try container.decode(String.self, forKey: .repeatt)
         self.date = try container.decode(String.self, forKey: .date)
+        self.finishDate = try container.decode(String.self, forKey: .finishDate)
         self.isDone = (try? container.decode(Bool.self, forKey: .isDone)) ?? false
         self.priority = try container.decode(String.self, forKey: .priority)
         self.category = try container.decode(String.self, forKey: .category)

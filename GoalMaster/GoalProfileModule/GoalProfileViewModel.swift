@@ -21,7 +21,7 @@ class GoalProfileViewModel: ObservableObject {
     }
     
     init() {
-        self.isNotif = UserDefaults.standard.bool(forKey: "isTog")
+        self.isNotif = UserDefaults.standard.bool(forKey: "isNotif")
         self.isEmail = UserDefaults.standard.bool(forKey: "isEmail")
     }
     

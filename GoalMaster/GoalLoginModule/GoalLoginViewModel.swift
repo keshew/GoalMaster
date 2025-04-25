@@ -27,7 +27,7 @@ class GoalLoginViewModel: ObservableObject {
                     UserDefaultsManager().savePassword(self?.password ?? "")
                     UserDefaultsManager().saveLoginStatus(true)
                 case .failure(let error):
-                    self?.alertMessage = error.localizedDescription
+                    self?.alertMessage = "Incorrect email or password"
                     self?.showAlert = true
                 }
             }

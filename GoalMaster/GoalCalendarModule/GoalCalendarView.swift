@@ -212,3 +212,149 @@ struct GoalCalendarView: View {
 #Preview {
     GoalCalendarView()
 }
+
+struct GoalsView: View {
+    let task: Task
+    var action: (() -> ())
+    private func determineImageName(for task: Task) -> String {
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        guard let taskDate = dateFormatter.date(from: task.date) else {
+            return "onTime"
+        }
+        
+        if task.isDone {
+            return "done"
+        } else if currentDate > taskDate {
+            return "lose"
+        } else {
+            return "onTime"
+        }
+    }
+    
+    private func setOpacity(for task: Task) -> Bool {
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        guard let taskDate = dateFormatter.date(from: task.date) else {
+            return false
+        }
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
+        let normalizedCurrentDate = calendar.date(from: components)!
+        
+        return normalizedCurrentDate > taskDate
+    }
+    
+    private var imageName: String {
+        return determineImageName(for: task)
+    }
+    
+    var body: some View {
+        Rectangle()
+            .fill(.white)
+            .overlay {
+                HStack {
+                    HStack {
+                        Image(imageName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40)
+                            .offset(x: -6)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text(task.title)
+                                .OpenBold(size: 16, color: Color(red: 48/255, green: 66/255, blue: 87/255))
+                                .lineLimit(1)
+                            
+                            HStack {
+                                Image(.time)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 12, height: 12)
+                                
+                                Text(formattedDate(from: task.date) + " - " + formattedDate(from: task.finishDate))
+                                    .Open(size: 12, color: Color(red: 83/255, green: 109/255, blue: 137/255))
+                            }
+                        }
+                        
+                        HStack {
+                            Text(task.category)
+                                .Open(size: 12, color: Color(red: 48/255, green: 66/255, blue: 87/255))
+                                .padding(7)
+                                .background {
+                                    Color(red: 230/255, green: 236/255, blue: 243/255)
+                                        .cornerRadius(5)
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color(red: 200/255, green: 211/255, blue: 222/255), lineWidth: 1)
+                                }
+                            
+                            Text("\(task.priority.capitalized) Priority")
+                                .Open(size: 12, color: Color(red: 48/255, green: 66/255, blue: 87/255))
+                                .padding(7)
+                                .background {
+                                    Color(red: 255/255, green: 180/255, blue: 70/255)
+                                        .cornerRadius(5)
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color(red: 220/255, green: 166/255, blue: 81/255), lineWidth: 1)
+                                }
+                        }
+                    }
+                    
+                    Spacer()
+                }
+                .overlay {
+                    if setOpacity(for: task) {
+                        Color.black.opacity(0.3)
+                    }
+                }
+            }
+            .frame(height: 110)
+            .cornerRadius(20)
+            .padding(.horizontal)
+            .onTapGesture {
+                if !setOpacity(for: task) {
+                    toggleTaskStatus()
+                }
+            }
+    }
+    
+    private func toggleTaskStatus() {
+        let taskId = task.id
+        let taskUpdates: [String: Any] = [
+            "id": taskId,
+            "isDone": !task.isDone
+        ]
+        
+        NetworkManager.shared.editTaskForUser(
+            username: UserDefaultsManager().getEmail() ?? "",
+            taskUpdates: taskUpdates
+        ) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    action()
+                case .failure(let error):
+                    print("Error updating task: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    private func formattedDate(from dateString: String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = inputFormatter.date(from: dateString) {
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = "MMM d, yyyy"
+            return outputFormatter.string(from: date)
+        }
+        return dateString
+    }
+}

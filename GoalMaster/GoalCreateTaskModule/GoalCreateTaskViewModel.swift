@@ -108,6 +108,7 @@ class GoalCreateTaskViewModel: ObservableObject {
             id: nil,
             title: name,
             date: dateFormatter.string(from: dateStart),
+            finishDate: dateFormatter.string(from: dateFinish),
             category: category,
             priority: priority,
             color: color,

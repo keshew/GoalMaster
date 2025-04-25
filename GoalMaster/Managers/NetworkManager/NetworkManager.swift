@@ -64,6 +64,7 @@ final class NetworkManager {
         let id: String?
         let title: String
         let date: String
+        let finishDate: String
         let category: String
         let priority: String
         let color: String
@@ -72,7 +73,7 @@ final class NetworkManager {
         let isDone: Bool
         
         enum CodingKeys: String, CodingKey {
-            case id, title, date, category, priority, color, time, isDone
+            case id, title, date, finishDate, category, priority, color, time, isDone
             case repeatField = "repeat"
         }
     }
@@ -119,6 +120,7 @@ final class NetworkManager {
         let taskDict: [String: Any] = [
             "title": task.title,
             "date": task.date,
+            "finishDate": task.finishDate, 
             "category": task.category,
             "priority": task.priority,
             "color": task.color,
