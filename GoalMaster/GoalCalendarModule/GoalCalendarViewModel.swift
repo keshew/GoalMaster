@@ -7,7 +7,8 @@ final class GoalCalendarViewModel: ObservableObject {
     @Published var isLoad = false
     @Published var currentDate = Date()
     @Published var selectedDate: Date? = nil
-    
+    @Published var selectedDateRange: ClosedRange<Date>? = nil
+
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -50,18 +51,24 @@ final class GoalCalendarViewModel: ObservableObject {
 
 extension GoalCalendarViewModel {
     private var filteredTasks: [Task] {
-        if let selectedDate = selectedDate {
+        guard let range = selectedDateRange else {
             return tasks.filter { task in
-                let taskDate = dateFormatter.date(from: task.date)
-                return Calendar.current.isDate(taskDate ?? Date(), inSameDayAs: selectedDate)
-            }
-        } else {
-            return tasks.filter { task in
-                let taskDate = dateFormatter.date(from: task.date)
-                return Calendar.current.isDate(taskDate ?? Date(), inSameDayAs: Date())
+                guard let taskDate = dateFormatter.date(from: task.date) else { return false }
+                return Calendar.current.isDateInToday(taskDate)
             }
         }
+        
+        return tasks.filter { task in
+            guard
+                let startDate = dateFormatter.date(from: task.date),
+                let endDate = dateFormatter.date(from: task.finishDate)
+            else {
+                return false
+            }
+            return startDate <= range.upperBound && endDate >= range.lowerBound
+        }
     }
+
 
     
     var displayedMonth: String {
@@ -84,14 +91,19 @@ extension GoalCalendarViewModel {
         })
     }
     
-     func taskCirclesOverlay(for date: Date) -> some View {
+    func taskCirclesOverlay(for date: Date) -> some View {
         let tasksForDate = tasks.filter { task in
-            let taskDate = dateFormatter.date(from: task.date)
-            return Calendar.current.isDate(taskDate ?? Date(), inSameDayAs: date)
+            guard
+                let startDate = dateFormatter.date(from: task.date),
+                let endDate = dateFormatter.date(from: task.finishDate)
+            else {
+                return false
+            }
+            return (startDate...endDate).contains(date)
         }
-        
+
         let maxCircles = min(tasksForDate.count, 3)
-        
+
         return HStack(spacing: 1) {
             ForEach(0..<maxCircles, id: \.self) { index in
                 if let color = Color(hex: tasksForDate[index].color) {
@@ -102,6 +114,7 @@ extension GoalCalendarViewModel {
             }
         }
     }
+
     
      func colorsForDay(isToday: Bool, isSelected: Bool, isCurrentMonth: Bool) -> (background: Color, text: Color, border: Color, borderWidth: CGFloat) {
         if isToday {

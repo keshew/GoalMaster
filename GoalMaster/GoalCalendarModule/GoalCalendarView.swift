@@ -125,6 +125,7 @@ struct GoalCalendarView: View {
                                                             )
                                                             .onTapGesture {
                                                                 goalCalendarModel.selectedDate = cellDate
+                                                                goalCalendarModel.selectedDateRange = cellDate...cellDate
                                                             }
                                                     }
                                                 }
