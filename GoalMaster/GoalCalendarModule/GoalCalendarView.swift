@@ -164,16 +164,16 @@ struct GoalCalendarView: View {
                 }
             }
             
-            Button(action: {
-                goalCalendarModel.isAdd = true
-            }) {
-                Image(.addBtn)
-                    .resizable()
-                    .frame(width: 60, height: 60)
+            if !UserDefaultsManager().isGuest() {
+                Button(action: {
+                    goalCalendarModel.isAdd = true
+                }) {
+                    Image(.addBtn)
+                        .resizable()
+                        .frame(width: 60, height: 60)
+                }
+                .position(x: UIScreen.main.bounds.width / 1.12, y: UIScreen.main.bounds.height / 1.3)
             }
-            .position(x: UIScreen.main.bounds.width / 1.12, y: UIScreen.main.bounds.height / 1.3)
-            .disabled(UserDefaultsManager().isGuest() ? true : false)
-            .opacity(UserDefaultsManager().isGuest() ? 0.5 : 1)
         }
         
         .fullScreenCover(isPresented: $goalCalendarModel.isAdd) {
@@ -192,6 +192,8 @@ struct GoalCalendarView: View {
             return 670
         } else if width < 220 {
             return 350
+        } else if width > 430 {
+            return 410
         } else {
             return 350
         }

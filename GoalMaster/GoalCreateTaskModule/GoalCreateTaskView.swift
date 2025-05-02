@@ -286,6 +286,8 @@ struct GoalCreateTaskView: View {
             return 450
         } else if width < 380 {
             return 50
+        } else if width > 430 {
+            return 160
         } else {
             return 70
         }

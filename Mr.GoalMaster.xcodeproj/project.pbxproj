@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		862BA52C2DB77F3C001B343C /* GoalMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoalMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		862BA52C2DB77F3C001B343C /* Mr.GoalMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mr.GoalMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		862BA5BE2DB780A4001B343C /* Exceptions for "GoalMaster" folder in "GoalMaster" target */ = {
+		862BA5BE2DB780A4001B343C /* Exceptions for "GoalMaster" folder in "Mr.GoalMaster" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 862BA52B2DB77F3C001B343C /* GoalMaster */;
+			target = 862BA52B2DB77F3C001B343C /* Mr.GoalMaster */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -24,7 +24,7 @@
 		862BA52E2DB77F3C001B343C /* GoalMaster */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				862BA5BE2DB780A4001B343C /* Exceptions for "GoalMaster" folder in "GoalMaster" target */,
+				862BA5BE2DB780A4001B343C /* Exceptions for "GoalMaster" folder in "Mr.GoalMaster" target */,
 			);
 			path = GoalMaster;
 			sourceTree = "<group>";
@@ -53,7 +53,7 @@
 		862BA52D2DB77F3C001B343C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				862BA52C2DB77F3C001B343C /* GoalMaster.app */,
+				862BA52C2DB77F3C001B343C /* Mr.GoalMaster.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,9 +61,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		862BA52B2DB77F3C001B343C /* GoalMaster */ = {
+		862BA52B2DB77F3C001B343C /* Mr.GoalMaster */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 862BA53A2DB77F3D001B343C /* Build configuration list for PBXNativeTarget "GoalMaster" */;
+			buildConfigurationList = 862BA53A2DB77F3D001B343C /* Build configuration list for PBXNativeTarget "Mr.GoalMaster" */;
 			buildPhases = (
 				862BA5282DB77F3C001B343C /* Sources */,
 				862BA5292DB77F3C001B343C /* Frameworks */,
@@ -76,11 +76,11 @@
 			fileSystemSynchronizedGroups = (
 				862BA52E2DB77F3C001B343C /* GoalMaster */,
 			);
-			name = GoalMaster;
+			name = Mr.GoalMaster;
 			packageProductDependencies = (
 			);
 			productName = GoalMaster;
-			productReference = 862BA52C2DB77F3C001B343C /* GoalMaster.app */;
+			productReference = 862BA52C2DB77F3C001B343C /* Mr.GoalMaster.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -98,7 +98,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 862BA5272DB77F3C001B343C /* Build configuration list for PBXProject "GoalMaster" */;
+			buildConfigurationList = 862BA5272DB77F3C001B343C /* Build configuration list for PBXProject "Mr.GoalMaster" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -112,7 +112,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				862BA52B2DB77F3C001B343C /* GoalMaster */,
+				862BA52B2DB77F3C001B343C /* Mr.GoalMaster */,
 			);
 		};
 /* End PBXProject section */
@@ -328,7 +328,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		862BA5272DB77F3C001B343C /* Build configuration list for PBXProject "GoalMaster" */ = {
+		862BA5272DB77F3C001B343C /* Build configuration list for PBXProject "Mr.GoalMaster" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				862BA5382DB77F3D001B343C /* Debug */,
@@ -337,7 +337,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		862BA53A2DB77F3D001B343C /* Build configuration list for PBXNativeTarget "GoalMaster" */ = {
+		862BA53A2DB77F3D001B343C /* Build configuration list for PBXNativeTarget "Mr.GoalMaster" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				862BA53B2DB77F3D001B343C /* Debug */,

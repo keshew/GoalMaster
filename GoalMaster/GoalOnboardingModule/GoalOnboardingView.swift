@@ -78,6 +78,8 @@ struct GoalOnboardingView: View {
             return 470
           } else if width < 380 {
               return 80
+          } else if width > 430 {
+              return 160
           } else {
               return 80
           }

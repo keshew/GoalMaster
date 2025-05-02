@@ -157,6 +157,8 @@ struct GoalSignView: View {
             return 510
           } else if width < 380 {
               return 150
+          } else if width > 430 {
+              return 210
           } else {
               return 150
           }

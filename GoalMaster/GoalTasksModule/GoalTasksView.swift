@@ -55,16 +55,16 @@ struct GoalTasksView: View {
                 }
             }
             
-            Button(action: {
-                goalTasksModel.isAdd = true
-            }) {
-                Image(.addBtn)
-                    .resizable()
-                    .frame(width: 60, height: 60)
+            if !UserDefaultsManager().isGuest() {
+                Button(action: {
+                    goalTasksModel.isAdd = true
+                }) {
+                    Image(.addBtn)
+                        .resizable()
+                        .frame(width: 60, height: 60)
+                }
+                .position(x: UIScreen.main.bounds.width / 1.12, y: UIScreen.main.bounds.height / 1.3)
             }
-            .position(x: UIScreen.main.bounds.width / 1.12, y: UIScreen.main.bounds.height / 1.3)
-            .disabled(UserDefaultsManager().isGuest() ? true : false)
-            .opacity(UserDefaultsManager().isGuest() ? 0.5 : 1)
         }
         .onAppear() {
             if !UserDefaultsManager().isGuest() {

@@ -145,6 +145,8 @@ struct GoalLoginView: View {
             return 670
           }  else if width < 220 {
               return 10
+          } else if width > 430 {
+              return 380
           } else {
               return 290
           }

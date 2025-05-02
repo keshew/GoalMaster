@@ -126,6 +126,8 @@ struct GoalSplashView: View {
             return 470
           } else if width < 380 {
               return 10
+          } else if width > 430 {
+              return 110
           } else {
               return 10
           }
@@ -138,6 +140,8 @@ struct GoalSplashView: View {
             return 470
           }  else if width < 380 {
               return 80
+          } else if width > 430 {
+              return 135
           } else {
               return 34
           }
@@ -150,6 +154,8 @@ struct GoalSplashView: View {
             return 470
           }  else if width < 380 {
               return 80
+          } else if width > 430 {
+              return 160
           } else {
               return 59
           }
