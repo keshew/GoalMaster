@@ -5,6 +5,7 @@ class GoalProfileViewModel: ObservableObject {
     @Published var isLog = false
     @Published var isSigh = false
     @Published var isLogOut = false
+    @Published var isOnb = false
     @Published var showError: Bool = false
     @Published var errorMessage: String = ""
     

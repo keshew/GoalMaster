@@ -2,6 +2,7 @@ import SwiftUI
 
 struct GoalProfileView: View {
     @StateObject var goalProfileModel =  GoalProfileViewModel()
+    @State var isAlert = false
     
     var body: some View {
         ZStack {
@@ -35,16 +36,10 @@ struct GoalProfileView: View {
                             VStack(alignment: .leading) {
                                 Text("\(UserDefaultsManager().getEmail() ?? "Error")")
                                     .OpenBold(size: 18)
-                                //
-                                //                                Text("artem@example,com")
-                                //                                    .Open(size: 14)
                             }
                             
                             Spacer()
                             
-                            //                            Image(.edit)
-                            //                                .resizable()
-                            //                                .frame(width: 20, height: 20)
                         }
                         .padding(.horizontal)
                         .padding(.top, 5)
@@ -118,6 +113,23 @@ struct GoalProfileView: View {
                                     .cornerRadius(16)
                                     .padding(.horizontal)
                             }
+                            
+                            Button(action: {
+                                goalProfileModel.isOnb = true
+                                UserDefaultsManager().quitQuest()
+                            }) {
+                                Rectangle()
+                                    .fill(.clear)
+                                    .frame(height: 50)
+                                    .overlay {
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(Color(red: 255/255, green: 251/255, blue: 101/255), lineWidth: 1)
+                                        Text("Quit guest mode")
+                                            .Open(size: 16, color: Color(red: 255/255, green: 251/255, blue: 101/255))
+                                    }
+                                    .cornerRadius(16)
+                                    .padding(.horizontal)
+                            }
                         } else {
                             Button(action: {
                                 goalProfileModel.isLogOut = true
@@ -136,11 +148,7 @@ struct GoalProfileView: View {
                             
                             
                             Button(action: {
-                                goalProfileModel.deleteAccount { success in
-                                    if success {
-                                        goalProfileModel.isLogOut = true
-                                    }
-                                }
+                                isAlert = true
                             }) {
                                 Rectangle()
                                     .fill(.clear)
@@ -169,8 +177,26 @@ struct GoalProfileView: View {
             )
         }
         
+        .alert(isPresented: $isAlert) {
+                  Alert(
+                      title: Text("Confirming account deletion"),
+                      message: Text("Are you sure you want to delete the account?"),
+                      primaryButton: .destructive(Text("Delete")) {
+                          goalProfileModel.deleteAccount { success in
+                              if success {
+                                  goalProfileModel.isLogOut = true
+                              }
+                          }
+                      },
+                      secondaryButton: .cancel(Text("Cancel"))
+                  )
+              }
+        
         .fullScreenCover(isPresented: $goalProfileModel.isLogOut) {
             GoalLoginView()
+        }
+        .fullScreenCover(isPresented: $goalProfileModel.isOnb) {
+            GoalOnboardingView()
         }
         .fullScreenCover(isPresented: $goalProfileModel.isSigh) {
             GoalSignView()
